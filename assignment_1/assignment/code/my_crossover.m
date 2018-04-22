@@ -29,6 +29,27 @@ function children  = my_crossover(pop, parentIds, p)
 %------------- BEGIN CODE --------------
 
 %% No crossover happening, can you do better?
-children = pop( parentIds(:,1) ,:);
+% children = pop( parentIds(:,1) ,:);
+children = [];
+sizeOfParent = size(parentIds);
+for i = 1:sizeOfParent(1)
+    % create random number to decide whether to crossover or not
+    random_number = rand(1);
+    if random_number < p.crossProb
+        % randomly generate a crossover point where the gene will be
+        % spliced
+        crossPoint = randi(p.nGenes);
+        parentA = pop(parentIds(i,1),:);
+        parentB = pop(parentIds(i,2),:);
+        % merge the parents genes at crosspoint
+        child = [parentA(1:crossPoint) parentB(1+crossPoint:end)];
+    else
+        % assign first parent's gene to child without change
+        child = pop(parentIds(i,1),:);
+    end
+    % add child's gene to genepool
+    children = vertcat(children, child);
+end
+
 
 %------------- END OF CODE -------------

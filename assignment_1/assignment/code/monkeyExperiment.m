@@ -6,7 +6,7 @@ output = monkeyGa('hamletQuote',p); % Run with hyperparameters
 % View Result
 gene2text(output.best(:,end)')
 plot([output.fitMax; output.fitMed]','LineWidth',3);
-legend('Max Fitness','Median Fitness','Location','NorthWest');
+legend('Max Fitness','Median Fitness','Location','SouthEast');
 xlabel('Generations'); ylabel('Fitness'); set(gca,'FontSize',16);
 title('Performance on Hamlet Task')
 
