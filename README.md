@@ -1,2 +1,2 @@
 # ECTA_group
-evolutionary computing theory and algorithm semester 2 MAS
+Evolutionary Computation Theory and Application Assignments
