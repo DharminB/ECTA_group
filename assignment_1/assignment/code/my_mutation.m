@@ -28,15 +28,20 @@ children = children;
 sizeOfChildren = size(children);
 %genesForMutation = round(1 + (p.nGenes-1)*rand(sizeOfParent(1),1))
 for i=1:sizeOfChildren(1)
-  % Since all genes have equal chance of mutation, we sample from a
-  % uniform distribution and then use that probability value to get
-  % a column index in the range of 1 to p.nGenes.
-  % Refere for more info: 
-  % https://de.mathworks.com/help/matlab/ref/rand.html
-  geneForMutation = round(1 + (p.nGenes-1)*rand);
-  % Randomly chosen values is assigned to the chosen gene from the,
-  % interval of [0 27] which was used to create the initial 
-  % population.
-  children(i,geneForMutation) = randi([0 27]);
+    for j=1:p.nGenes
+        %       
+        % Refer for more info: 
+        % https://de.mathworks.com/help/matlab/ref/rand.html
+        
+        random_number = rand(1);
+        if random_number < p.mutProb
+            % Randomly chosen values is assigned to the chosen gene from the,
+            % interval of [0 27] which was used to create the initial 
+            % population.
+            children(i,j) = randi([0 27]);
+        end
+        
+        
+    end
 end
 %------------- END OF CODE --------------

@@ -25,6 +25,6 @@ function eliteIds = my_elitism(fitness, p)
 %------------- BEGIN CODE --------------
 
 %% Here we just keep the first individual as an elite, can you do better?
-eliteIds = 1;
-
+% eliteIds = 1;
+[val, eliteIds] = max(fitness);
 %------------- END OF CODE --------------
