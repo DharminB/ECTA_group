@@ -50,6 +50,4 @@ for i = 1:sizeOfParent(1)
     % add child's gene to genepool
     children = vertcat(children, child);
 end
-
-
 %------------- END OF CODE -------------

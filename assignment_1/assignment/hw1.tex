@@ -1,5 +1,9 @@
 \documentclass{article}
-
+%\usepackage{geometry}
+% \geometry{
+%a4paper,
+%top=30mm,
+%}
 
 % load package with some of the available options - you may not need this!
 \usepackage[framed,autolinebreaks,useliterate]{mcode}
@@ -21,8 +25,9 @@
 \usepackage{url,textcomp}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{18pt}
-\title{ECTA Homework 1\\Genetic Algorithms\\and\\Infinite Monkeys}
-\author{\color{red}YOUR NAME, \texttt{your.email@h-brs.de}}
+\title{ECTA Homework 1\\Genetic Algorithms and\\Infinite Monkeys}
+\author{\color{blue}Arun Prabhu, \texttt{arun.prabhu@smail.inf.h-brs.de}\\
+\color{blue}Dharmin Bakaraniya, \texttt{dharmin.bakaraniya@smail.inf.h-brs.de}}
 % //////////////////////////////////////////////////
 
 \begin{document}
@@ -123,20 +128,20 @@ Begin by implementing the four given genetic operators, replacing the filler cod
 % Put your code here:
 
 \item \textbf{Tournament Selection}
-	\lstinputlisting[firstline=30, lastline=35]{code/my_selection.m}
-	
+	\lstinputlisting[firstline=30, lastline=53]{code/my_selection.m}
+	\newpage
 \item \textbf{Crossover}
-	\lstinputlisting[firstline=29, lastline=35]{code/my_crossover.m}
-	
+	\lstinputlisting[firstline=29, lastline=53]{code/my_crossover.m}
+	\newpage
 \item \textbf{Mutation}
-	\lstinputlisting[firstline=24, lastline=29]{code/my_mutation.m}
+	\lstinputlisting[firstline=24, lastline=41]{code/my_mutation.m}
 	
 \item \textbf{Elitism}
-	\lstinputlisting[firstline=27, lastline=30]{code/my_elitism.m}	
+	\lstinputlisting[firstline=25, lastline=30]{code/my_elitism.m}	
 	
 %-------------------------%
 \end{enumerate}
-
+\newpage
 
 \subsection{Ablation Study}
 One common technique for better understanding an algorithm is remove each component and see the result. What happens when we don't use elitism or we skip crossover? In this section we test a few combinations. 
