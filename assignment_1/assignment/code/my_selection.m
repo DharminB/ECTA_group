@@ -31,40 +31,23 @@ function parentIds = my_selection(fitness, p)
 
 %% This is 'random' selection of parent pairs, can you do better?
 % parentIds = randi(p.popSize, [p.popSize 2]);
-% father = datasample(p.popSize
 parentIds = [];
+% iterate over all the individuals in the population
 for i = 1:p.popSize
+    % Randomly select p.sp individual
     possibleFather = randi(p.popSize, [1 p.sp]);
     [val, index] = max(fitness(possibleFather));
+    % Select the one with best fitness as the father
     father = possibleFather(index);
+    % Randomly select p.sp individual again
     possibleMother = randi(p.popSize, [1 p.sp]);
     [val, index] = max(fitness(possibleMother));
+    % Select the one with best fitness as the mother
     mother = possibleMother(index);
+    % Pack them together
     pair = [father mother];
+    % Append them to the parentIds list
     parentIds = vertcat(parentIds, pair);
 end
-% parentIds
-% while(count_1 <= fitness_len)
-%     indices_1 = randperm(fitness_len);
-%     indices_1 = indices_1(1:p.sp);
-%     [val,index_1] = max(fitness(indices_1));
-%     if ~(ismember(indices_1(index_1),parent_1))
-%        parent_1(count_1) = indices_1(index_1);
-%        count_1 = count_1 + 1;
-%     end
-% end
-% parent_2 = double.empty();
-% count_2 = 1;
-% while(count_2 <= fitness_len)
-%     indices_2 = randperm(fitness_len);
-%     indices_2 = indices_2(1:p.sp);
-%     [val,index_2] = max(fitness(indices_2));
-%     if ~(ismember(indices_2(index_2),parent_2))    
-%        parent_2(count_2) = indices_2(index_2);
-%        count_2 = count_2 + 1;
-%     end
-% end
-% parentIds = [parent_1' parent_2'];
-% disp("hello");
 end
 %------------- END OF CODE --------------
