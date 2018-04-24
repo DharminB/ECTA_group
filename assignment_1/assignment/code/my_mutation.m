@@ -26,22 +26,16 @@ function children  = my_mutation(children, p)
 %% No mutation happening, can you do better?
 children = children; 
 sizeOfChildren = size(children);
-%genesForMutation = round(1 + (p.nGenes-1)*rand(sizeOfParent(1),1))
 for i=1:sizeOfChildren(1)
     for j=1:p.nGenes
-        %       
-        % Refer for more info: 
-        % https://de.mathworks.com/help/matlab/ref/rand.html
-        
+        % generate a random float(0 to 1) for every gene in a child
         random_number = rand(1);
         if random_number < p.mutProb
             % Randomly chosen values is assigned to the chosen gene from the,
             % interval of [0 27] which was used to create the initial 
             % population.
             children(i,j) = randi([0 27]);
-        end
-        
-        
+        end        
     end
 end
 %------------- END OF CODE --------------
