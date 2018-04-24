@@ -191,24 +191,55 @@ With this data saved you can compare the two algorithms and compute the signific
 	\item \textbf{Describe the main purposes of crossover and of mutation, how do your results illustrate their operation?} \\
 %-------------------------%
 % ANSWER: 
-\textit{
- \color{red}WRITE SOMETHING HERE
+\texttt{
+ \color{blue}
+ \begin{enumerate}
+         \item Crossover
+         \begin{itemize}
+                 \item The main purpose of crossover is to spread and maintain favorable genes across generation hence producing better solutions over time.
+                 \item As it can be seen in the top left graph above, the fitness of the population achieved using crossover is better than the fitness of the population achieved without crossover. This fitness is also achieved in a shorter time.
+         \end{itemize}
+         \item Mutation
+         \begin{itemize}
+                 \item Mutation is a way of introducing new information into genes of the population. This enables achieving better solutions than just crossover.
+                 \item As it can be seen in the top right graph above, the fitness of the population achieved using mutation is better than the fitness of the population achieved without mutation. This fitness is also achieved in a shorter time.
+         \end{itemize}
+ \end{enumerate}
  }
 %-------------------------%
 
 	\item \textbf{When only crossover is used the problem is not typically solved. Why? Could you devise an experiment that would support your explanation? One in which crossover could the solve the problem every time?}\\
 %-------------------------%
 % ANSWER:
-\textit{
-\color{red}WRITE SOMETHING HERE
+\texttt{
+\color{blue}
+\begin{itemize}
+        \item The reason why "only crossover" typically does not solve the problem is random generation of intial individuals in the population.
+        \item As "only crossover" does not result in individuals which are outside the bounds set by the genes in the intial population.
+        \item Yes, an experiment which solves the problem with "only crossover" can be devised.
+        \item For example, in One-Max, if we create the initial population such that it has all the possible values for each gene then crossover alone can solve the problem given enough generations and if the crossover point is not constant.
+\end{itemize}
  }
 %-------------------------%
 	
 	\item \textbf{Describe the benefits of elitism in the crossover and mutation only cases.}\\
 %-------------------------%
 % ANSWER:
-\textit{
-\color{red}WRITE SOMETHING HERE
+\texttt{
+\color{blue}
+\begin{enumerate}
+        \item Elitism with crossover
+        \begin{itemize}
+                \item Elitism helps to reach the best attainable fitness faster. To ensure "no elitism", we added the eliteId at the end instead of at the beginning, since the last 1 individual is being excluded.
+                \item As seen from the graph on the bottom left, with only crossover vs. crossover and elitism, median fitness of the population was reached 4 generation faster.
+        \end{itemize}
+        \item Elitism with mutation
+        \begin{itemize}
+                \item Elitism helps to retain the progress made by the parent generation, so even if the children generation mutates towards worse fitness, the whole population does not suffer.
+                \item As seen from the graph on the bottom right, with only mutation vs. mutation and elitism, we can see that elitism helps to achieve better fitness of the population.
+        \end{itemize}
+\end{enumerate}
+
 }
 %-------------------------%	
 
@@ -224,8 +255,8 @@ Now time to test your algorithm on the entire soliloquy. Is it really better tha
 By using the \mcode{tic} and \mcode{toc} commands we can time how long a program takes to execute. How long did it take your algorithm to find the whole speech?\\
 %-------------------------%
 % ANSWER:
-\textit{
-\color{red}WRITE SOMETHING HERE
+\texttt{
+\color{blue}In 807.1651 seconds, the algorithm achieved 98.4094\% correctness.
 }
 %-------------------------%	
 
@@ -239,8 +270,15 @@ How long would it take to find the same solution by a monkey on a type writer, i
 
 %-------------------------%
 % ANSWER:
-\textit{
-\color{red}WRITE SOMETHING HERE
+\texttt{
+\color{blue}
+\begin{itemize}
+        \item Taking 10 trials on single evaluation time measurement, we got an average single evaluation time of $8.76299 \cdot 10^{-7}$
+        \item Possibilities for a single character : 28
+        \item Number of characters : 1446
+        \item Number of distinct possibilities : $28^{1446} = 3.895 \cdot 10^{2092}$
+        \item Possible exploration time : $3.895 \cdot 10^{2092} \cdot 8.76299 \cdot 10^{-7} = 3.4131 \cdot 10^{2086}$ seconds.
+\end{itemize}
 }
 %-------------------------%
 
@@ -248,7 +286,12 @@ How long would it take to find the same solution by a monkey on a type writer, i
 How comparable are these methods? Is random search comparable to evolutionary search?\\
 %-------------------------%
 \textit{
-\color{red}WRITE SOMETHING HERE
+\color{blue}No. These methods are not even close to comparable.
+\begin{itemize}
+        \item GA took 807.1651 seconds to achieve correctness of 98.4094\%.
+        \item Brute force(smart monkey with MATLAB skills) would take $3.4131 \cdot 10^{2086}$ seconds (more than the age of universe $~10^{13}$).
+        \item GA (1) - Smart Monkey (0)
+\end{itemize}
 }
 %-------------------------%	
 
