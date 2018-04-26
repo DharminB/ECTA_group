@@ -36,8 +36,7 @@ for i = 1:sizeOfParent(1)
     % create random number to decide whether to crossover or not
     random_number = rand(1);
     if random_number < p.crossProb
-        % randomly generate a crossover point where the gene will be
-        % spliced
+        % randomly generate a crossover point where the gene will be spliced
         crossPoint = randi(p.nGenes);
         parentA = pop(parentIds(i,1),:);
         parentB = pop(parentIds(i,2),:);
