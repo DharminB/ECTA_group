@@ -26,5 +26,7 @@ function eliteIds = my_elitism(fitness, p)
 
 %% Here we just keep the first individual as an elite, can you do better?
 % eliteIds = 1;
+% Since the population is very small, we are selecting best performing
+% individual.
 [val, eliteIds] = max(fitness);
 %------------- END OF CODE --------------
