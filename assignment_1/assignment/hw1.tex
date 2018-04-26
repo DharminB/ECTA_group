@@ -161,8 +161,8 @@ With this data saved you can compare the two algorithms and compute the signific
 
 	\begin{figure}[h!]
 	\begin{center}
-	\includegraphics[width=0.75\textwidth]{img/1_vsStandard.png}
-	\caption{\color{red}FILL IN YOUR OWN PLOT HERE}
+	\includegraphics[width=0.75\textwidth]{img/myStandard.png}
+	\caption{\color{blue}Baseline vs Our Implementation}
 	\end{center}
 	\end{figure}
 	
@@ -171,10 +171,10 @@ With this data saved you can compare the two algorithms and compute the signific
 	Perform the following comparisons of your algorithm with various components removed and replace the plots with your own, this can be done by replacing the functions in the code and saving the result (e.g. replacing the \mcode{my_crossover} function with the \mcode{no_crossover} function: (1) Your full implementation vs. No crossover, (2) Your full implementation vs. No mutation, (3) No crossover vs. No crossover AND no elitism, and (4) No mutation  vs. No mutation AND no elitism.
 
 		\begin{figure}[h!]
-		\includegraphics[width=0.5\textwidth]{img/2_vsNoCross.png}
-		\includegraphics[width=0.5\textwidth]{img/3_vsNoMut.png}
-		\includegraphics[width=0.5\textwidth]{img/4_vsNoCrossNoElite.png}
-		\includegraphics[width=0.5\textwidth]{img/5_vsNoMutNoElite.png}
+		\includegraphics[width=0.5\textwidth]{img/My_vs_NoCross.png}
+		\includegraphics[width=0.5\textwidth]{img/My_vs_NoMut.png}
+		\includegraphics[width=0.5\textwidth]{img/My_NoCross_vs_NoCrossNoElite.png}
+		\includegraphics[width=0.5\textwidth]{img/My_NoMut_vs_NoMutNoElite.png}
 		\caption
 		{
 		\textbf{GA performance when operators are removed}\newline
@@ -182,7 +182,6 @@ With this data saved you can compare the two algorithms and compute the signific
 		\textit{Top Right:} No Mutation, 
 		\textit{Bottom Left:} No Crossover vs. No Crossover and No Elitism, 
 		\textit{Bottom Right:} No Mutation and No Elitism
-		\color{red}FILL IN YOUR OWN PLOTS HERE
 		}
 		\end{figure}
 \newpage
@@ -202,7 +201,7 @@ With this data saved you can compare the two algorithms and compute the signific
          \item Mutation
          \begin{itemize}
                  \item Mutation is a way of introducing new information into genes of the population. This enables achieving better solutions than just crossover.
-                 \item As it can be seen in the top right graph above, the fitness of the population achieved using mutation is better than the fitness of the population achieved without mutation. This fitness is also achieved in a shorter time.
+                 \item As it can be seen in the top right graph above, the fitness of the population achieved using mutation is better than the fitness of the population achieved without mutation.
          \end{itemize}
  \end{enumerate}
  }
@@ -217,7 +216,7 @@ With this data saved you can compare the two algorithms and compute the signific
         \item The reason why "only crossover" typically does not solve the problem is random generation of intial individuals in the population.
         \item As "only crossover" does not result in individuals which are outside the bounds set by the genes in the intial population.
         \item Yes, an experiment which solves the problem with "only crossover" can be devised.
-        \item For example, in One-Max, if we create the initial population such that it has all the possible values for each gene then crossover alone can solve the problem given enough generations and if the crossover point is not constant.
+        \item For example, in One-Max, if we create the initial population such that it has all the possible values for each gene then crossover alone can solve the problem, given enough generations and if the crossover point is not constant.
 \end{itemize}
  }
 %-------------------------%
@@ -239,7 +238,6 @@ With this data saved you can compare the two algorithms and compute the signific
                 \item As seen from the graph on the bottom right, with only mutation vs. mutation and elitism, we can see that elitism helps to achieve better fitness of the population.
         \end{itemize}
 \end{enumerate}
-
 }
 %-------------------------%	
 
@@ -273,7 +271,7 @@ How long would it take to find the same solution by a monkey on a type writer, i
 \texttt{
 \color{blue}
 \begin{itemize}
-        \item Taking 10 trials on single evaluation time measurement, we got an average single evaluation time of $8.76299 \cdot 10^{-7}$
+        \item Taking 10 trials on single evaluation time measurement, we got an average single evaluation time of $8.76299 \cdot 10^{-7}$ seconds.
         \item Possibilities for a single character : 28
         \item Number of characters : 1446
         \item Number of distinct possibilities : $28^{1446} = 3.895 \cdot 10^{2092}$
@@ -283,9 +281,10 @@ How long would it take to find the same solution by a monkey on a type writer, i
 %-------------------------%
 
 \vspace{3cm}
+\newpage
 How comparable are these methods? Is random search comparable to evolutionary search?\\
 %-------------------------%
-\textit{
+\texttt{
 \color{blue}No. These methods are not even close to comparable.
 \begin{itemize}
         \item GA took 807.1651 seconds to achieve correctness of 98.4094\%.
