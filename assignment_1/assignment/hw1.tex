@@ -137,7 +137,7 @@ Begin by implementing the four given genetic operators, replacing the filler cod
 	\lstinputlisting[firstline=24, lastline=41]{code/my_mutation.m}
 	
 \item \textbf{Elitism}
-	\lstinputlisting[firstline=25, lastline=30]{code/my_elitism.m}	
+	\lstinputlisting[firstline=25, lastline=32]{code/my_elitism.m}	
 	
 %-------------------------%
 \end{enumerate}
@@ -229,13 +229,13 @@ With this data saved you can compare the two algorithms and compute the signific
 \begin{enumerate}
         \item Elitism with crossover
         \begin{itemize}
-                \item Elitism helps to reach the best attainable fitness faster. To ensure "no elitism", we added the eliteId at the end instead of at the beginning, since the last 1 individual is being excluded.
-                \item As seen from the graph on the bottom left, with only crossover vs. crossover and elitism, median fitness of the population was reached 4 generation faster.
+            \item Elitism helps to reach the best attainable fitness just a little faster. To ensure "no elitism", we added the eliteId at the end instead of at the beginning, since the last 1 individual is being excluded (refer monkeyGaReplica.m line:103).
+                \item As seen from the graph on the bottom right, with only crossover vs. crossover and elitism, median fitness of the population was reached just 4 generation faster.
         \end{itemize}
         \item Elitism with mutation
         \begin{itemize}
                 \item Elitism helps to retain the progress made by the parent generation, so even if the children generation mutates towards worse fitness, the whole population does not suffer.
-                \item As seen from the graph on the bottom right, with only mutation vs. mutation and elitism, we can see that elitism helps to achieve better fitness of the population.
+                \item As seen from the graph on the bottom left, with only mutation vs. mutation and elitism, we can see that elitism helps to achieve better fitness of the population.
         \end{itemize}
 \end{enumerate}
 }
@@ -276,6 +276,7 @@ How long would it take to find the same solution by a monkey on a type writer, i
         \item Number of characters : 1446
         \item Number of distinct possibilities : $28^{1446} = 3.895 \cdot 10^{2092}$
         \item Possible exploration time : $3.895 \cdot 10^{2092} \cdot 8.76299 \cdot 10^{-7} = 3.4131 \cdot 10^{2086}$ seconds.
+        \item Possible average time : $\frac{1}{2} \cdot$ total exploration time $ = 1.7 \cdot 10^{2086}$ seconds.
 \end{itemize}
 }
 %-------------------------%
