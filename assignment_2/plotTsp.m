@@ -18,7 +18,7 @@ function h  = plotTsp(genes, coords, img)
 % Apr 2018; Last revision: 25-Apr-2018
 
 %------------- Input Parsing ------------
-if      nargin < 3;   img = imread('germany-cities-map.jpg'); 
+if      nargin < 3;   img = imread('germany_map.jpg'); 
 elseif isstring(img); img = imread(img); 
 end
 %------------- BEGIN CODE --------------
@@ -26,8 +26,8 @@ end
 imagesc(img); hold on; 
 
 % Plot line (just fit by trial and error, not exact)
-h = plot(coords(1,[genes genes(1)])*73-380,...
-        -coords(2,[genes genes(1)])*120+6665,...
+h = plot(coords(1,[genes genes(1)])*130-500,...
+        -coords(2,[genes genes(1)])*250+13500,...
         '-o', 'LineWidth', 2);
 axis equal; axis tight;
 xticks('');yticks('');
