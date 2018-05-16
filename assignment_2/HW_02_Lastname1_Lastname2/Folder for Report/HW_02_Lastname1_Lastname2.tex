@@ -25,59 +25,54 @@
 \setlength{\droptitle}{-5em}
 
 \title{Evolutionary Computation Theory and Application  \\
-				- Assignment 2: Traveling Salesman Problem -}
-\author{Name1, Name 2}
-\date{}
+				Assignment 2: Traveling Salesman Problem}
+\author{Arun Prabhu, Dharmin B.}
+\date{\today{}}
 
 \begin{document}
 
 \maketitle
 
-\section{General Remarks }
-
-Please Follow those remarks. Deviating will lead to a reduced score
-
-\begin{itemize}
-	\item Lable your axis 
-	\item Include a descriptive, not covering legend in your plots
-	\item Caption you images with a clear description
-	\item Remember to name the file correctly
-	\item Make sure that both team members submit the same file, with the same name
-	\item Please make sure that all figures and lines are clearly readable
-\end{itemize}
 
 \section{Solution}
 
 \begin{table} [h!]
 	  \centering
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Parameter} & \textbf{Value}   \\
-\hline
-Population size & XXX \\
-\hline
-Crossover Rates &  1, 2, 3, 4 \\
-\hline
-Mutation Rates & 1, 2, 3, 4 \\
-\hline
-Repetitions & 30 \\
-\hline
-Generations & XXX \\
-\hline
-Average best fitness		 & XXX \\
-\hline
-\end{tabular}
-\caption{Add a Table describing all relevant parameters for your experiments. You can add more parameters as you seem fit. }
+    \begin{tabular}{|l|c|}
+    \hline
+    \textbf{Parameter} & \textbf{Value}   \\\hline
+    Population size & 100 \\\hline
+    Crossover Rates &  0.01, 0.1, 0.99, \textbf{0.98}\\\hline
+    Mutation Rates & 0.01, 0.1, 0.99, \textbf{0.25}\\\hline
+    Repetitions & 30 \\\hline
+    Generations & 1000 \\\hline
+    Average best fitness		 & 58.8038 \\\hline
+    Best fitness & 53.6009 \\\hline
+    \end{tabular}
+\caption{Parameters for Experiments}
 \label{table:defparams}
 \end{table}
 
+\begin{table}[h!]
+    \centering
+    \label{tab:label}
+    \begin{tabular}{|l|c|}\hline
+        \textbf{Parameter} & \textbf{Value} \\\hline
+        Population size & 100 \\\hline
+        Fitness & 50.7048 \\\hline
+        Generations & 3000 \\\hline
+        Crossover rate & 0.99 \\\hline
+        Mutation rate & 0.1 \\\hline
+    \end{tabular}
+    \caption{Parameters for Absolute best result}
+\end{table}
 \newpage
 \section{Results}
 
-\begin{figure}[ht!]
+\begin{figure}[h!]
   \centering
-  \includegraphics[width=0.7\textwidth]{images/resultmap}
-    \caption{Show your best map \label{fig:xxx1}}
+  \includegraphics[width=1.0\textwidth]{images/BestPath.jpg}
+    \caption{Absolute best map \label{fig:xxx1}}
 \end{figure}
 
 \newpage
@@ -85,8 +80,8 @@ Average best fitness		 & XXX \\
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=1.0\textwidth]{images/crossfig}
-	\caption{Caption describing your plot \label{fig:crossfig}}
+	\includegraphics[width=1.0\textwidth]{images/crossover_exp_98.jpg}
+	\caption{Crossover rate comparision\label{fig:crossfig}}
 \end{figure}
 
 Describe and explain the different mutation rates and how they influence the learning behaviour. Please remember to also focus on why, not only on what.
@@ -99,13 +94,18 @@ Also elaborate on the mutation rate you have chosen as best mutation rate.
 
 \begin{figure}[ht!]
   \centering
-  \includegraphics[width=1.0\textwidth]{images/mutfig}
-    \caption{Caption describing your plot \label{fig:mutfig}}
+  \includegraphics[width=1.0\textwidth]{images/mutation_exp_25.jpg}
+    \caption{Mutation rate comparision\label{fig:mutfig}}
 \end{figure}
 
 Describe and explain the different crossover rates and how they influence the learning behaviour. Please remember to also focus on why, not only on what.
 Also elaborate on the crossover rate you have chosen as best mutation rate.
 
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{images/1000X30_updated.jpg}
+  \caption{Best and median fitness over 30 Experiments\label{fig:mutfig}}
+\end{figure}
 
 
 \end{document}
