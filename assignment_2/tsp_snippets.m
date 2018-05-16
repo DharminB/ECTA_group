@@ -1,93 +1,73 @@
-%% TSP
-clear
+%% Read file
 cityData = importdata('cities.csv');
-nCities = 3;
+nCities = 100;
 coords = cityData.data([1:nCities], [3 2])'; % <- switch to plot with north up after imagesc
-plot(coords(1,:), coords(2,:), 'o')
-
-%% Algorithm Parameters
-popSize = 25;
-nGenes  = nCities;
-
-%% Create a single individual
-% someInd = [1 4 3 2 5 9 8 7 6 10];
-% plot(coords(1,someInd), coords(2,someInd),'-o');
-% plotTsp(someInd, coords);
-
-%% Create a population
-for iPop = 1:popSize
-    pop(iPop,:) = randperm(nGenes);
-end
-
-%% Calculated Distance of an individual
-% distance from last to first city
-% tic;
-% % ind = pop(1,:);
-% popDistance = [];
-% for i=1:popSize
-%     ind = pop(i,:);
-%     % ind([1 end]) gives the first and last element in the array ind
-%     % coords(:,ind([1 end])) give the lat and long of first and last city
-%     % for that individual
-%     distance = pdist( coords(:,ind([1 end]) )'  );
-%     for iCity = 2:nGenes
-%         twoCityCoords = coords(:,ind([iCity-1:iCity]) );
-%         distance = distance + pdist( twoCityCoords'); % pDist expects columns to be cities so must transpose twoCityCoords
-%     end
-%     popDistance = vertcat(popDistance, distance);
-% end
-% toc
-% disp(popDistance)
 
 %% Look up distance for one individual
 distMat = squareform(pdist(coords')); % Precalculate Distance Matrix
-% fitness(distMat,pop,popSize,nGenes)
-tic;
-ind = pop(1,:);
-for i=1:1000
-    distance = distMat(ind(1), ind(end));
-    for iCity = 2:nGenes
-        twoCityIndices= [ind(iCity-1), ind(iCity)]; % Indices of distance matrix
-        distance = distance + distMat(twoCityIndices(1), twoCityIndices(2));
-    end
+
+%% Run once and plot (best and median, best path)
+% Run one experiment
+output = my_tsp(distMat);
+
+% show output
+output.bestArray(end)
+subplot(1,2,1);
+plot([output.bestArray; output.medianArray]', 'LineWidth', 2);
+legend('Best Fitness', 'Median Fitness', 'Location', 'NorthEast');
+xlabel('Generation');
+ylabel('Fitness');
+% axis([0 maxGen 0 50]);
+title('Performance on TSP');
+subplot(1,2,2);
+plotTsp(output.elite, coords);
+title('map of best');
+
+%% Run multiple times
+
+maxExp = 30;
+% array to save the best fitness across different generation and experiments. 
+aggregate_best_output = []; 
+% array to save the median fitness across different generation and experiments. 
+aggregate_median_output = [];
+
+% run experiment multiple times
+parfor iExp = 1:maxExp
+   output = my_tsp(distMat);
+   aggregate_best_output(iExp,:) = output.bestArray;
+   aggregate_median_output(iExp,:) = output.medianArray;
 end
 
-toc
-disp(distance)
+% print best experiment fitness over all exp
+best_of_all_exp = aggregate_best_output(:,end);
+disp("Best experiment Distance")
+disp(min(best_of_all_exp))
 
-%% Crossover
-% -- Using set theory to find missing and common values
-parentA = 1;
-parentB = 2;
+% plotting
+x = 1:length(aggregate_best_output);
+best_y = aggregate_best_output;
+median_y = aggregate_median_output;
 
-% Select a point to split genes
-%   Here we do 1 point crossover. Can you think of any advantage of doing
-%   '2 point' crossover?
-splitPoint = randi(nGenes);
-parent1Genes = pop(parentA,[1:splitPoint]);
+best_medY = median(best_y);
+best_uprY = prctile(best_y,75);
+best_lwrY = prctile(best_y,25);
 
-% Find the values in [1:nCities] that are NOT in parent1Genes
-missing = setdiff(1:nCities,parent1Genes);
+median_medY = median(median_y);
+median_uprY = prctile(median_y,75);
+median_lwrY = prctile(median_y,25);
 
-% Get those missing values in parent2, in the same order ('stable') 
-parent2Genes = intersect( pop(parentB,:) ,missing,'stable');
+               
+hFill(1) = jbfill(x,best_uprY,best_lwrY,'b'); hold on;
+% hLine = plot(x, best_medY,'Color','k','LineWidth',1); 
+plot(x, best_medY,'k--','LineWidth',1); % Dotted line to make median more clear 
 
-child = [parent1Genes, parent2Genes];
+hFill(2) = jbfill(x,median_uprY,median_lwrY, 'g', 'k', 0);
+% hLine2 = plot(x, median_medY,'Color','k','LineWidth',1); 
+plot(x, median_medY,'k--','LineWidth',1); % Dotted line to make median more clear 
 
-%% Plotting
-% subplot(2,2,1);
-%     plotTsp(pop(parentA,:), coords);
-%     title('ParentA')
-% subplot(2,2,2);
-%     plotTsp(pop(parentB,:), coords);
-%     title('ParentB')
-% subplot(2,2,[3 4])
-%     plotTsp(child, coords);
-%     title('Child')
-%%
-plot(coords(1,child), coords(2,child), '-o');
-plotTsp(child, coords);
-
-
-
-
+hold off
+legend([hFill], 'Best Fitness', 'Median Fitness','Location', 'NorthEast');
+xlabel('Generation');
+ylabel('Fitness');
+% axis([0 maxGen 0 50]);
+title('Performance on TSP');
