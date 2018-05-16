@@ -2,14 +2,14 @@ function parentIds = selection(fitness, popSize, sp)
 parentIds = [];
 % iterate over all the individuals in the population
     for i = 1:popSize
-        % Randomly select p.sp individual
+        % Randomly select sp individual
         possibleFather = randi(popSize, [1 sp]);
-        [val, index] = max(fitness(possibleFather));
+        [val, index] = min(fitness(possibleFather));
         % Select the one with best fitness as the father
         father = possibleFather(index);
-        % Randomly select p.sp individual again
+        % Randomly select sp individual again
         possibleMother = randi(popSize, [1 sp]);
-        [val, index] = max(fitness(possibleMother));
+        [val, index] = min(fitness(possibleMother));
         % Select the one with best fitness as the mother
         mother = possibleMother(index);
         % Pack them together
