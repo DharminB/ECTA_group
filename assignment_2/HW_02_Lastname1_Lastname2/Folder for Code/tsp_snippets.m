@@ -23,6 +23,67 @@ subplot(1,2,2);
 plotTsp(output.elite, coords);
 title('map of best');
 
+%% Crossover rate experiment
+
+% Create a population
+for iPop = 1:100
+    pop(iPop,:) = randperm(nCities);
+end
+
+crossoverRate = [0.01, 0.1, 0.99, 0.98];
+maxExp = 30;
+
+aggregate_output = [];
+for i=1:length(crossoverRate)
+    aggregate_best_output = []; 
+
+    % run experiment multiple times
+    parfor iExp = 1:maxExp
+       output = my_new_tsp(distMat, pop, crossoverRate(i), 0.25);
+       aggregate_best_output(iExp,:) = output.bestArray;
+    end
+    
+    medY = median(aggregate_best_output);
+    aggregate_output(i,:) = medY;
+end
+
+plot(aggregate_output', 'LineWidth', 2);
+legend('Rate 1', 'Rate 2','Rate 3', 'Rate 4', 'Location', 'NorthEast');
+xlabel('Generation');
+ylabel('Fitness');
+title('Performance on TSP for different Crossover rate');
+
+
+%% Mutation rate experiment
+
+% Create a population
+for iPop = 1:100
+    pop(iPop,:) = randperm(nCities);
+end
+
+MutationRate = [0.01, 0.1, 0.99, 0.25];
+maxExp = 30;
+
+aggregate_output = [];
+for i=1:length(MutationRate)
+    aggregate_best_output = []; 
+
+    % run experiment multiple times
+    parfor iExp = 1:maxExp
+       output = my_new_tsp(distMat, pop, 0.98, MutationRate(i));
+       aggregate_best_output(iExp,:) = output.bestArray;
+    end
+
+    medY = median(aggregate_best_output);
+    aggregate_output(i,:) = medY;
+end
+
+plot(aggregate_output', 'LineWidth', 2);
+legend('Rate 1', 'Rate 2','Rate 3', 'Rate 4', 'Location', 'NorthEast');
+xlabel('Generation');
+ylabel('Fitness');
+title('Performance on TSP for different Mutation rate');
+
 %% Run multiple times
 
 maxExp = 30;
@@ -42,6 +103,8 @@ end
 best_of_all_exp = aggregate_best_output(:,end);
 disp("Best experiment Distance")
 disp(min(best_of_all_exp))
+disp("Average of best experiment Distance")
+disp(mean(best_of_all_exp))
 
 % plotting
 x = 1:length(aggregate_best_output);
