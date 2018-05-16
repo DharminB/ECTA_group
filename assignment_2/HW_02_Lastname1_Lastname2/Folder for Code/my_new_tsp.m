@@ -1,22 +1,15 @@
-function output = my_tsp(distMat)
+function output = my_new_tsp(distMat, pop, crossProb, mutProb)
     
     sizeOfMat = size(distMat);
     % Algorithm Parameters
     popSize = 100;
     nGenes  = sizeOfMat(1);
-    maxGen = 3000;
+    maxGen = 1000;
     crossoverPtNum = 2;
     sp = 2; % selection pressure
-    mutProb = 0.1; % probability for an individual to mutate
-    crossProb = 0.99; % probability for crossover
     bestArray = [];
     medianArray = [];
     
-    % Create a population
-    for iPop = 1:popSize
-        pop(iPop,:) = randperm(nGenes);
-    end
-
     % looping for generation
     for iGen=1:maxGen
         popFitness = fitness(distMat,pop);
