@@ -24,9 +24,9 @@ plotTsp(output.elite, coords);
 title('map of best');
 
 %% Crossover rate experiment
-
+popSize = 50;
 % Create a population
-for iPop = 1:100
+for iPop = 1:popSize
     pop(iPop,:) = randperm(nCities);
 end
 
@@ -55,9 +55,9 @@ title('Performance on TSP for different Crossover rate');
 
 
 %% Mutation rate experiment
-
+popSize = 50;
 % Create a population
-for iPop = 1:100
+for iPop = 1:popSize
     pop(iPop,:) = randperm(nCities);
 end
 
