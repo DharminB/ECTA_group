@@ -2,7 +2,7 @@ function output = my_new_tsp(distMat, pop, crossProb, mutProb)
     
     sizeOfMat = size(distMat);
     % Algorithm Parameters
-    popSize = 100;
+    popSize = size(pop,1);
     nGenes  = sizeOfMat(1);
     maxGen = 1000;
     crossoverPtNum = 2;
