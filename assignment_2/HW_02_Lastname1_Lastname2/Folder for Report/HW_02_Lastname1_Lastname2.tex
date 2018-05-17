@@ -41,13 +41,13 @@
     \begin{tabular}{|l|c|}
     \hline
     \textbf{Parameter} & \textbf{Value}   \\\hline
-    Population size & 100 \\\hline
+    Population size & 50 \\\hline
     Crossover Rates &  0.01, 0.1, 0.99, \textbf{0.98}\\\hline
     Mutation Rates & 0.01, 0.1, 0.99, \textbf{0.25}\\\hline
     Repetitions & 30 \\\hline
     Generations & 1000 \\\hline
-    Average best fitness		 & 58.8038 \\\hline
-    Best fitness & 53.6009 \\\hline
+    Average best fitness		 & 59.2327 \\\hline
+    Best fitness & 55.8960 \\\hline
     \end{tabular}
 \caption{Parameters for Experiments}
 \label{table:defparams}
@@ -91,7 +91,8 @@ Also elaborate on the mutation rate you have chosen as best mutation rate.
     \item We choose \texttt{sp} individuals and select one with best fitness as father. We choose the mother in the same way.
     \item We select a \texttt{crossPoint} at random and select \texttt{1:crossPoint} genes from father's genotype and remaining genes are added in the order in which they appear in mother's genotype.
     \item We have discovered that crossover rate of 98\% performs best.
-    \item As the crossover rate increases, the means fitness becomes better and better.
+    \item As the crossover rate increases, the means fitness becomes better and better. This is expected, because when the rate is high, the child will have higher chance of getting better genes from 2 parents but when the rate is low, child will probably be just a copy of father.
+    \item As it is seen in Figure~\ref{fig:crossfig}, 98\% crossover rate experiment performs almost same with 99\% but slightly better at the very end.
 \end{itemize}
 
 \newpage
@@ -112,6 +113,7 @@ Also elaborate on the crossover rate you have chosen as best mutation rate.
     \item We mutate an individual with \texttt{mutProb} probability.
     \item We select two points \textit{i,j}. We reverse the gene string between \textit{i} and \textit{j}.
     \item We have discovered that mutation rate of 25\% performs best.
+    \item The reason for this is because 25\% is optimal. If the rate is higher than it disrupts the progress of generation and if it is lower than it is not enough progress.
 \end{itemize}
 
 \begin{figure}[ht!]
