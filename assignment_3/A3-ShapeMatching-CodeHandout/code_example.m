@@ -1,3 +1,6 @@
+% Add path of subfolder to use the funtion
+addpath('./shapematching/')
+addpath('./nurbs_toolbox/')
 % Create a NACA foil
 numEvalPts = 256;                           % Num evaluation points
 nacaNum = [0,0,1,2];                        % NACA Parameters
@@ -15,7 +18,7 @@ half = round(nacafoil/2);
 [~,errorBottom] = dsearchn(nacafoil(:,1+end/2:end)',foil(:,1+end/2:end)');
 
 % Total fitness (mean squared error)
-fitness = mean([errorTop.^2; errorBottom.^2]);
+fitness = mean([errorTop.^2; errorBottom.^2])
 
 % Visualize
 figure(1);
