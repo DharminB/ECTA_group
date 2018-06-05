@@ -7,7 +7,7 @@ function mutated_children = mutation(children, mutProb)
             % generate a random float(0 to 1) for every gene in a child
             random_number = rand(1);
             if random_number < mutProb
-                mutated_children(ichild,j) = (rand(1,1)-0.5)/10;
+                mutated_children(ichild,j) = (rand(1,1)-0.5);
             end        
         end
     end

@@ -1,7 +1,7 @@
 function output = my_ga(nacafoil)
 
 % Algorithm Parameters
-popSize = 20;
+popSize = 100;
 nGenes  = 32;
 maxGen = 100;
 sp = 2; % selection pressure

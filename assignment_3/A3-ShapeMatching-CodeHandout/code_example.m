@@ -25,7 +25,7 @@ ylabel('Fitness');
 % axis([0 maxGen 0 50]);
 title('Performance on NACA 0012');
 subplot(1,2,2);
-plotFoil(nacafoil, elite);
+plotFoil(nacafoil, output.elite);
 title('wing of best');
 
 
