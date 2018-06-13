@@ -3,7 +3,7 @@ function output = my_es(nacafoil)
 % Algorithm Parameters
 popSize = 4;
 nGenes  = 32;
-lambda = popSize/2;
+lambda = floor(popSize/2);
 sigma = 0.1;
 change_in_sigma = 0.01;
 maxGen = 5000;
@@ -59,12 +59,17 @@ for iGen=1:maxGen
             sigma = sigma + change_in_sigma;
         elseif freq_success_mut > 0.2
             sigma = sigma - change_in_sigma;
-        sucessful_mutation = 0;
         end
+        sucessful_mutation = 0;
         prev_status = curr_status;
-        
+        if sigma > 5
+            sigma = 5;
+        elseif sigma < -5
+            sigma = -5;
+        end
         sigma
-end
+    end
+end    
 fitness = mse(pop, nacafoil);
 [ignore, indices] = sort(fitness);
 
