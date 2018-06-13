@@ -3,7 +3,7 @@ function output = my_ga(nacafoil)
 % Algorithm Parameters
 popSize = 50;
 nGenes  = 32;
-maxGen = 400;
+maxGen = 40;
 sp = 2; % selection pressure
 mutProb = 1/nGenes; % probability for an individual to mutate
 crossProb = 0.99; % probability for crossover

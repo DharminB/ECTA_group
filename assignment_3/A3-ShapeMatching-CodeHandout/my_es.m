@@ -1,26 +1,23 @@
 function output = my_es(nacafoil)
 
 % Algorithm Parameters
-popSize = 4;
+popSize = 1;    % mu in ES terms
 nGenes  = 32;
-lambda = floor(popSize/2);
+lambda = 1;
 sigma = 0.1;
-change_in_sigma = 0.01;
-maxGen = 5000;
+change_in_sigma = 0.5;
+maxGen = 1000;
 bestFit = zeros([maxGen, 1]);
 medianFit = zeros([maxGen, 1]);
 
 sucessful_mutation = 0;    
-freq_success_mut = 0;
-prev_status = 0;
 p = 5;      % number of generation at which freq_success_mut is update
 
 % Create an individual (consisting of 32 y values between -0.5 and 0.5)
 pop = (rand(popSize,32)-0.5);
+fitness = mse(pop, nacafoil);
 
 for iGen=1:maxGen
-    iGen
-    fitness = mse(pop, nacafoil);
     bestFit(iGen) = min(fitness);
     medianFit(iGen) = median(fitness);
     % Selection
@@ -35,47 +32,33 @@ for iGen=1:maxGen
             sucessful_mutation = sucessful_mutation+1;
         end
     end
+    
+    % combine individuals(parent and children) and their fitness
     pop = vertcat(pop, mutated_children);
     fitness = vertcat(fitness, fitness_mutated_children);
-    [ignore, indices] = sort(fitness);
+    % sort them
+    [sorted_fitness, indices] = sort(fitness);
+    % select only top mu individuals (and their fitnesses)
     pop = pop(indices(1:popSize),:);
+    fitness = sorted_fitness(1:popSize);
     
+    % update sigma every p generations with 1/5th rule
     if mod(iGen, p) == 0
-        sucessful_mutation;
-        freq_success_mut = sucessful_mutation / p
-        if freq_success_mut - 0.2 <= 0
-            curr_status = 1;
-        else
-            curr_status = 0;
-        end
-        if (prev_status == curr_status)
-            alpha = 1.1;
-        else
-            alpha = 0.9;
-        end
-        change_in_sigma = change_in_sigma + (alpha-1)/100;
-%         change_in_sigma = change_in_sigma*alpha;
+        freq_success_mut = sucessful_mutation / p;
         if freq_success_mut < 0.2
-            sigma = sigma + change_in_sigma;
+            sigma = sigma * change_in_sigma;
         elseif freq_success_mut > 0.2
-            sigma = sigma - change_in_sigma;
+            sigma = sigma / change_in_sigma;
         end
         sucessful_mutation = 0;
-        prev_status = curr_status;
-        if sigma > 5
-            sigma = 5;
-        elseif sigma < -5
-            sigma = -5;
-        end
-        sigma
+        % print progress
+        disp([iGen fitness(1) sigma])
     end
 end    
-fitness = mse(pop, nacafoil);
-[ignore, indices] = sort(fitness);
 
 % append to output
 output.bestFit = bestFit;
 output.medianFit = medianFit;
-output.elite = pop(indices(1),:);
+output.elite = pop(1,:);
     
 end
