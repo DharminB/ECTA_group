@@ -11,7 +11,9 @@ nacafoil= create_naca(nacaNum,numEvalPts);  % Create foil
 %% Single experiment
 
 % output = my_ga(nacafoil);
-output = my_es(nacafoil);
+% output = my_es(nacafoil);
+output = my_cma_es(nacafoil);
+% output = my_cma_es_ep(nacafoil);
 
 % show output
 output.bestFit(end)
