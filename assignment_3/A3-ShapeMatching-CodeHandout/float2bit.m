@@ -1,5 +1,5 @@
-function bitString = float2bit(num)
-    num = (num + 0.5)*1024;
+function bitString = float2bit(num, nBit)
+    num = (num + 0.5)*(2^nBit);
     num = floor(num);
-    bitString = dec2bin(num) - '0';
+    bitString = dec2bin(num, nBit) - '0';
 end
