@@ -1,9 +1,9 @@
-function output = my_ga(nacafoil)
+function output = my_ga(nacafoil, total_eval, verbose)
 
 % Algorithm Parameters
 popSize = 50;
 nGenes  = 32;
-maxGen = 40;
+maxGen = total_eval/popSize;
 sp = 2; % selection pressure
 mutProb = 1/nGenes; % probability for an individual to mutate
 crossProb = 0.99; % probability for crossover
@@ -14,7 +14,6 @@ medianFit = zeros([maxGen, 1]);
 pop = (rand(popSize,32)-0.5);
 
 for iGen=1:maxGen
-    disp(iGen);
     fitness = mse(pop, nacafoil);
     bestFit(iGen) = min(fitness);
     medianFit(iGen) = median(fitness);
@@ -31,6 +30,9 @@ for iGen=1:maxGen
     eliteIds = elitism(fitness);
     elite = pop(eliteIds,:);
     pop = vertcat(elite, mutated_children(1:end-1,:));
+    if verbose == 1
+        disp([iGen min(fitness)])
+    end
 end
 
 % append to output
