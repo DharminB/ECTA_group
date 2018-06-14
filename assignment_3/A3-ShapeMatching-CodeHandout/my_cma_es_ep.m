@@ -4,7 +4,6 @@ function output = my_cma_es_ep(nacafoil, total_eval, verbose)
 nGenes  = 32;
 lambda = 10;
 sigma = 0.03;
-total_eval = 2000;
 maxGen = total_eval/lambda;
 
 mu = floor(lambda/2);
