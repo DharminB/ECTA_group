@@ -19,9 +19,10 @@ nacafoil= create_naca(nacaNum,numEvalPts);  % Create foil
 % ============================
 
 % output = my_ga(nacafoil, 2000, 1);
+output = my_bit_ga(nacafoil, 20000, 1);
 % output = my_es(nacafoil, 2000, 1);
 % output = my_cma_es(nacafoil, 2000, 1);
-output = my_cma_es_ep(nacafoil, 2000, 1);
+% output = my_cma_es_ep(nacafoil, 2000, 1);
 
 % show output
 output.bestFit(end)
