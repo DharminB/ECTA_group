@@ -2,7 +2,7 @@ function output = my_bit_ga(nacafoil, total_eval, verbose)
 
 % Algorithm Parameters
 nBit = 12;
-popSize = 100;
+popSize = 20;
 nGenes  = 32*nBit;
 maxGen = total_eval/popSize;
 sp = 2; % selection pressure
