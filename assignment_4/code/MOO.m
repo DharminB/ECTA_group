@@ -1,8 +1,8 @@
 %% plot test
 
-popSize = 10;
-nGenes = 5;
-nGen = 10;
+popSize = 50;
+nGenes = 20;
+nGen = 100;
 % pop = randi(2, popSize, nGenes)-1
 % fitness = randi(popSize, popSize, 2)
 % front = randi(3, popSize,1)
@@ -11,7 +11,7 @@ nGen = 10;
 %% Single experiment
 tic;
 % hold on
-output = NSGA(nGenes, nGen, popSize);
+output = NSGA(nGenes, nGen, popSize, 1);
 % hold off
 toc
 % show output

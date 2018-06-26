@@ -1,4 +1,4 @@
-function output = NSGA(nGenes, maxGen, popSize)
+function output = NSGA(nGenes, maxGen, popSize, nsga)
     
     % Algorithm Parameters
     sp = 2; % selection pressure
@@ -6,14 +6,13 @@ function output = NSGA(nGenes, maxGen, popSize)
     crossProb = 0.8; % probability for crossover
     bestFit = zeros([maxGen, 1]);
     medianFit = zeros([maxGen, 1]);
-    nsga = 1;
     
     % generate the population randomly
     pop = randi(2, popSize, nGenes) - 1;
     front = ones(popSize, 1);
     gif('myfile.gif');
     for iGen=1:maxGen
-%         pause(0.2);
+        pause(0.2);
         % Selection
         parentIds = selection(front, sp);
 
