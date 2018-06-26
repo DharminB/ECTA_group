@@ -9,21 +9,10 @@ function output = NSGA(nGenes, maxGen, popSize)
     
     % generate the population randomly
     pop = randi(2, popSize, nGenes) - 1
+    front = ones(popSize, 1);
     gif('myfile.gif');
-%     hold on;
     for iGen=1:maxGen
 %         pause(0.2);
-        fitness = calculateFitness(pop);
-%         bestFit(iGen) = min(fitness);
-%         medianFit(iGen) = median(fitness);
-
-        % sorting
-%         front = calculateFront(fitness);
-        front = naive_domination_sort(fitness);
-        % plotting gif
-        displayFronts(front, fitness, pop);
-        gif
-        hold on
         % Selection
         parentIds = selection(front, sp);
 
@@ -32,13 +21,16 @@ function output = NSGA(nGenes, maxGen, popSize)
 
         % Mutation
         mutated_children = mutation(children, mutProb);
-
-        % Elitism
-        elites = elitism(front, pop);
-        size(elites)
-        pop = vertcat(elites, mutated_children(1:end,:));
-        pop = pop(1:popSize,:);
-%         pop = mutated_children;
+        
+        new_pop = vertcat(pop, mutated_children);
+        output_val = NSGA2(new_pop, popSize);
+        pop = output_val.new_pop
+        fitness = output_val.fitness
+        front = output_val.front
+        % plotting gifs
+        displayFronts(front, fitness, pop);
+        gif
+        hold on
     end
 %     hold off;
     % append to output
