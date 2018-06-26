@@ -1,7 +1,7 @@
 function fitness = calculateFitness(pop)
     popSize = size(pop,1);
     nGenes = size(pop,2);
-    fitness = zeros([popSize,2]);
+    fitness = zeros(popSize,2);
     for i = 1 : popSize
 %         ind = pop(i,:);
         a = find(pop(i,:), 1, 'first');
