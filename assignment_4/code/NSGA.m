@@ -6,6 +6,7 @@ function output = NSGA(nGenes, maxGen, popSize)
     crossProb = 0.8; % probability for crossover
     bestFit = zeros([maxGen, 1]);
     medianFit = zeros([maxGen, 1]);
+    nsga = 1;
     
     % generate the population randomly
     pop = randi(2, popSize, nGenes) - 1;
@@ -21,9 +22,13 @@ function output = NSGA(nGenes, maxGen, popSize)
 
         % Mutation
         mutated_children = mutation(children, mutProb);
-
+        
         new_pop = vertcat(pop, mutated_children);
-        output = non_NSGA(new_pop, popSize);
+        if nsga == 1
+            output = NSGA2(new_pop, popSize);
+        else
+            output = non_NSGA(new_pop, popSize);
+        end
         pop = output.new_pop;
         front = output.front;
         fitness = output.fitness;
