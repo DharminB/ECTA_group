@@ -12,14 +12,14 @@ function output = NSGA(nGenes, maxGen, popSize)
     gif('myfile.gif');
 %     hold on;
     for iGen=1:maxGen
-        pause(0.2);
+%         pause(0.2);
         fitness = calculateFitness(pop);
 %         bestFit(iGen) = min(fitness);
 %         medianFit(iGen) = median(fitness);
 
         % sorting
-        front = calculateFront(fitness);
-        
+%         front = calculateFront(fitness);
+        front = naive_domination_sort(fitness);
         % plotting gif
         displayFronts(front, fitness, pop);
         gif
