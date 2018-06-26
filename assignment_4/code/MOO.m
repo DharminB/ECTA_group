@@ -1,8 +1,8 @@
 %% plot test
 
-popSize = 50;
-nGenes = 20;
-nGen = 200;
+popSize = 10;
+nGenes = 5;
+nGen = 10;
 % pop = randi(2, popSize, nGenes)-1
 % fitness = randi(popSize, popSize, 2)
 % front = randi(3, popSize,1)
