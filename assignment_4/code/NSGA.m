@@ -6,9 +6,10 @@ function output = NSGA(nGenes, maxGen, popSize)
     crossProb = 0.8; % probability for crossover
     bestFit = zeros([maxGen, 1]);
     medianFit = zeros([maxGen, 1]);
+    nsga = 1;
     
     % generate the population randomly
-    pop = randi(2, popSize, nGenes) - 1
+    pop = randi(2, popSize, nGenes) - 1;
     front = ones(popSize, 1);
     gif('myfile.gif');
     for iGen=1:maxGen
@@ -23,11 +24,15 @@ function output = NSGA(nGenes, maxGen, popSize)
         mutated_children = mutation(children, mutProb);
         
         new_pop = vertcat(pop, mutated_children);
-        output_val = NSGA2(new_pop, popSize);
-        pop = output_val.new_pop
-        fitness = output_val.fitness
-        front = output_val.front
-        % plotting gifs
+        if nsga == 1
+            output = NSGA2(new_pop, popSize);
+        else
+            output = non_NSGA(new_pop, popSize);
+        end
+        pop = output.new_pop;
+        front = output.front;
+        fitness = output.fitness;
+        % plotting gif
         displayFronts(front, fitness, pop);
         gif
         hold on
