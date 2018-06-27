@@ -1,15 +1,17 @@
-function output = NSGA2(pop, popSize)
+function output = NSGA2(pop, popSize, plotgif)
     R = unique(pop, 'rows');
     N = popSize;
     r_size = size(R, 1);
-    fitness = calculateFitness(R);
+    fitness = calculateFitness3(R);
     front = domination_sort(fitness);
-%     front = naive_domination_sort(fitness)
 
-    % plot whole pop
-    displayFronts(front, fitness, R);
-    gif
-    hold on
+    if plotgif == 1
+        % plot whole pop
+        pause(0.5);
+        displayFronts3d(front, fitness, R);
+        gif
+        hold on
+    end
     
     i = 1;
     new_pop = [];
@@ -32,11 +34,14 @@ function output = NSGA2(pop, popSize)
     b = vertcat(b, front(front == i));
     b = b(1:popSize);
     
-    % plot whole pop with next gen markers
-    [C, greenIndices, ib] = intersect(R, new_pop, 'rows');
-    displayFrontsWithMarkers(front, fitness, R, greenIndices);
-    gif
-    hold on
+    if plotgif == 1
+        % plot whole pop with next gen markers
+%         [C, greenIndices, ib] = intersect(R, new_pop, 'rows');
+%         pause(0.2);
+%         displayFrontsWithMarkers(front, fitness, R, greenIndices);
+%         gif
+%         hold on
+    end
     
     output.new_pop = new_pop;
     output.fitness = a;

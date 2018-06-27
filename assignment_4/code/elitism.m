@@ -1,7 +1,11 @@
-function elites = elitism(front, pop)
-    % return the best individual logical array
-    eliteIds = front==1;
-    elites = pop(eliteIds,:);
-    elites = unique(elites, 'rows');
-    size(elites);
+function elitesIds = elitism(front, popSize)
+    front_size = size(front);
+    if front_size < popSize 
+        elitesIds = ones(popSize,1);
+        [sf, indices] = sort(front);
+        elitesIds(1:front_size) = indices;
+    else
+        [sf, indices] = sort(front);
+        elitesIds = indices(1:popSize);
+    end
 end
