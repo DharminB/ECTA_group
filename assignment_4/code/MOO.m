@@ -1,17 +1,17 @@
 %% single experiment
 
-popSize = 10;
-nGenes = 6;
-nGen = 10;
+popSize = 100;
+nGenes = 20;
+nGen = 100;
 plotgif = 0;
 use_nsga2 = 1
 if plotgif == 1
-    gif('myfile.gif');
+    gif('myfile.gif','DelayTime',1/10,'frame',gcf);
 end
 tic;
 output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
 toc
-displayFronts3d(output.front, output.fitness, output.pop);
+displayFronts(output.front, output.fitness, output.pop);
 % output.front==1
 hold off;
 

@@ -31,16 +31,16 @@ for iFront=1:nFront
          ,'MarkerFaceColor', colors(iFront,:),'MarkerSize',25)
     
     hold on
-%     if iFront ==1
-%         text(fitness((front==iFront),1)+0.35,...
-%             fitness((front==iFront),2)-(0.25*~mod(iFront,2)),...
-%             num2str(pop( (front==iFront),:)))
-%     end
+    if iFront ==1
+        text(fitness((front==iFront),1)+0.35,...
+            fitness((front==iFront),2)-(0.25*~mod(iFront,2)),...
+            num2str(pop( (front==iFront),:)))
+    end
 %         text(fitness((front==iFront),1)+0.35,...
 %             fitness((front==iFront),2)-(0.25*~mod(iFront,2)),...
 %             num2str(pop( (front==iFront),:)))
 end
-xlabel('Leading Ones');ylabel('Trailing Zeros');
+xlabel('Leading Zeros');ylabel('Trailing Ones');
 axis([-0.5 nGenes+0.5 -0.5 nGenes+0.5]); hold off;
 title('Solutions and Fronts');
 grid on;
