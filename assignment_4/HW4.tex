@@ -51,13 +51,13 @@
 	\end{enumerate}
 
 \section{Submission Instructions}
-Follow along with the instructions in this PDF, filling in your own code, data, and observations as noted. Your own data should be inserted into the latex code of the PDF and recompiled. All code must be done in MATLAB.
+Follow along with the instructions in this PDF, filling in your own code, data, and observations as noted. Your own data should be inserted into the latex code of the PDF and recompiled. All code must be done in MATLAB.\@
 
-To be perfectly clear we expect two submissions to LEA:
+To be perfectly clear we expect two submissions to LEA:\@
 \begin{enumerate}
-	\item 1 PDF (report) -- a modified version of your submission PDF, with your own code snippets, figures, and responses inserted
-	\item 1 ZIP (code and data)   -- a .zip file containing all code use to run experiments (.m files) \textit{and} resulting data as a .mat file
-	\item 1 GIF (algorithm progress) -- use the file on the MATLAB file exchange: \url{https://www.mathworks.com/matlabcentral/fileexchange/63239-gif}
+	\item 1 PDF (report) \- a modified version of your submission PDF, with your own code snippets, figures, and responses inserted
+    \item 1 ZIP (code and data)   \- a \texttt{.zip} file containing all code use to run experiments (.m files) \textit{and} resulting data as a \texttt{.mat} file
+	\item 1 GIF (algorithm progress) \- use the file on the MATLAB file exchange: \url{https://www.mathworks.com/matlabcentral/fileexchange/63239-gif}
 \end{enumerate}
 
 
@@ -73,7 +73,7 @@ To be perfectly clear we expect two submissions to LEA:
 		\item Generations 100
 		\item Hints:
 		\begin{itemize}
-			\item Crossover and mutation can be performed just as in other bit string problems, e.g. one-max
+			\item Crossover and mutation can be performed just as in other bit string problems, e.g.\ one-max
 			\item The \mcode{sortrows} function can be used to sort matrices, you can use this first before implementing NSGAs sorting
 		\end{itemize}
 	\end{itemize}
@@ -92,24 +92,37 @@ To be perfectly clear we expect two submissions to LEA:
 \subsection{Short Answer (25pts)}
 \begin{itemize}
 	\item (10pts) Compare the sort used by NSGA-II and MATLAB's quicksort built in \mcode{sortrows} function. How long does 100 generations take with each approach when using a population size of:
+        \begin{itemize}
+        \color{blue}
+            \item We take average of time taken over 10 experiments.
+        \color{black}
+        \end{itemize}
 	\begin{enumerate}
 		\item 10:
 			\begin{itemize}
-			\item Quicksort:
-			\item Fast non-dominated sort:
+                \item Quicksort: \color{blue}0.056817\color{black}
+			\item Fast non-dominated sort: \color{blue}0.082453\color{black}
 			\end{itemize}
 		\item 100:
 			\begin{itemize}
-			\item Quicksort:
-			\item Fast non-dominated sort:
+			\item Quicksort: \color{blue}0.43277\color{black}
+			\item Fast non-dominated sort: \color{blue}1.6236\color{black}
 			\end{itemize}
 		\item 1000:
 			\begin{itemize}
-			\item Quicksort:
-			\item Fast non-dominated sort:
+			\item Quicksort: \color{blue}4.9949\color{black}
+			\item Fast non-dominated sort: \color{blue}111.2765\color{black}
 			\end{itemize}
 	\end{enumerate}
 	\item (5pts) Plot the end result of a single run with [100 pop and 100 gen] and [10 pop and 1000 gen]. Describe the difference between the end results. Which is preferable?
+        \color{blue}
+        Figure~\ref{fig:comparision}
+        \color{black}
+        \begin{figure}[htpb]
+            \centering
+            \includegraphics[width=1.0\linewidth]{section3point2_comparision.jpg}
+            \caption{NSGA2 with 100 pop and 100 gen VS\@. NSGA2 with 10 pop and 1000 gen for solving leading ones trailing zeros problem with bitstring of length 20.}\label{fig:comparision}
+        \end{figure}
 	\item (5pts) Imagine you were to replace the objective of ``leading zeros'' with ``largest binary number''. Predict the result, and give your reasoning.
 	\item (5pts) Imagine you were to add a third objective: ``non-consecutive ones and zeros'' (ones not touching ones and zeros not touching zeros, e.g. 0101 and 1010 are the most optimal 4 bit solutions). How would you adjust the hyperparameters to get a satisfactory result?
 	\item (5pts) In many GAs and ESs populations must be ranked, but no special methods are used. Why is a faster sort in MOO so important?
@@ -123,6 +136,11 @@ Implement the third objective ``non-consecutive ones and zeros''
 	\item What changes did you make to the algorithm and hyperparameters to get a good result?
 	\item List the solutions in your 1st front. Are they all Pareto optimal? How complete is your front (in percentage, based on $\#1$)
 	\item Plot the end result in 3D. (Use \mcode{plot3} or \mcode{scatter3})
+        \begin{figure}[htpb]
+            \centering
+            \includegraphics[width=1.0\linewidth]{3dextraQuestion.jpg}
+            \caption{NSGA2 algorithm with 3 fitness (leading ones, trailing 0 and non-consecutive 0 and 1) ran for 100 gen with 100 pop for bitstring of size 20.}\label{fig:3dplot}
+        \end{figure}
 \end{enumerate}
 
 

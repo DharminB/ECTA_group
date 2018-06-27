@@ -1,36 +1,70 @@
-%% plot test
+%% single experiment
 
 popSize = 10;
-nGenes = 5;
+nGenes = 6;
 nGen = 10;
-% pop = randi(2, popSize, nGenes)-1
-% fitness = randi(popSize, popSize, 2)
-% front = randi(3, popSize,1)
-% displayFronts(front, fitness, pop);
-
-%% Single experiment
+plotgif = 0;
+use_nsga2 = 1
+if plotgif == 1
+    gif('myfile.gif');
+end
 tic;
-% hold on
-output = NSGA(nGenes, nGen, popSize, 1);
-% hold off
+output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
 toc
-displayFronts(output.front, output.fitness, output.pop);
+displayFronts3d(output.front, output.fitness, output.pop);
+% output.front==1
 hold off;
 
 %% Run multiple times
 tic;
-maxExp = 10;
-% array to save the best fitness across different generation and experiments. 
-aggregate_best_output = []; 
-% array to save the median fitness across different generation and experiments. 
-aggregate_median_output = [];
+maxExp = 3;
+popSize = 1000;
+nGenes = 20;
+nGen = 100;
+plotgif = 0;
+if plotgif == 1
+    gif('myfile.gif');
+end
 
+algos = [0 1];
 % run experiment multiple times
-% parfor iExp = 1:maxExp
-%     output = colorGraph(edgeList, nNodes, kcolors);
-%     aggregate_best_output(iExp,:) = output.bestFit;
-%     aggregate_median_output(iExp,:) = output.medianFit;
-% end
+for algo_num = algos
+    sum = 0;
+    for iExp = 1:maxExp
+        iExp
+        tic;
+        output = my_ga(nGenes, nGen, popSize, algo_num, plotgif);
+        sum = sum + toc;
+    end
+    disp("Algo " + algo_num + " takes " + sum/maxExp + " seconds on average")
+end
+
+%% Single exp comparision for popSize
+nGenes = 20;
+plotgif = 0;
+use_nsga2 = 1
+if plotgif == 1
+    gif('myfile.gif');
+end
+
+subplot(1,2,1);
+tic;
+popSize = 100;
+nGen = 100;
+output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
+toc
+displayFronts(output.front, output.fitness, output.pop);
+
+subplot(1,2,2);
+tic;
+popSize = 10;
+nGen = 1000;
+output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
+toc
+displayFronts(output.front, output.fitness, output.pop);
+hold off;
+
+%%
 % 
 % % print best experiment fitness over all exp
 % best_of_all_exp = aggregate_best_output(:,end);

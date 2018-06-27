@@ -1,6 +1,6 @@
 %% Display Fronts
 % 
-function fig = displayFronts(front, fitness, pop)
+function fig = displayFronts3d(front, fitness, pop)
 %displayFronts - Displays pareto fronts in leading ones/trailing zeros
 % 
 %
@@ -26,7 +26,7 @@ popSize= size(pop,1);
 hold off;
 nFront = max(front); colors = parula(nFront);
 for iFront=1:nFront
-    h = plot(fitness((front==iFront),1),fitness((front==iFront),2));
+    h = plot3(fitness((front==iFront),1),fitness((front==iFront),2), fitness((front==iFront),3));
     set(h,'LineStyle','--','Color',colors(iFront,:),'Marker','o'...
          ,'MarkerFaceColor', colors(iFront,:),'MarkerSize',25)
     
@@ -40,7 +40,7 @@ for iFront=1:nFront
 %             fitness((front==iFront),2)-(0.25*~mod(iFront,2)),...
 %             num2str(pop( (front==iFront),:)))
 end
-xlabel('Leading Ones');ylabel('Trailing Zeros');
+xlabel('Leading Ones');ylabel('Trailing Zeros');zlabel('Non-consecutive 1 and 0')
 axis([-0.5 nGenes+0.5 -0.5 nGenes+0.5]); hold off;
 title('Solutions and Fronts');
 grid on;
