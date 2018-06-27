@@ -39,9 +39,9 @@ function output = NSGA(nGenes, maxGen, popSize, nsga)
     end
 %     hold off;
     % append to output
-    output.bestFit = bestFit;
-    output.medianFit = medianFit;
-    output.elite = pop(1,:);
+    output.pop = pop;
+    output.front = front;
+    output.fitness = fitness;
     
 
 end
