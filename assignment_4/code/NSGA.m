@@ -2,8 +2,8 @@ function output = NSGA(nGenes, maxGen, popSize, nsga)
     
     % Algorithm Parameters
     sp = 2; % selection pressure
-    mutProb = 1/nGenes; % probability for mutation
-    crossProb = 0.8; % probability for crossover
+    mutProb = 2/nGenes; % probability for mutation
+    crossProb = 0.9; % probability for crossover
     bestFit = zeros([maxGen, 1]);
     medianFit = zeros([maxGen, 1]);
     
@@ -12,7 +12,7 @@ function output = NSGA(nGenes, maxGen, popSize, nsga)
     front = ones(popSize, 1);
     gif('myfile.gif');
     for iGen=1:maxGen
-        pause(0.2);
+        pause(0.5);
         % Selection
         parentIds = selection(front, sp);
 
@@ -23,6 +23,7 @@ function output = NSGA(nGenes, maxGen, popSize, nsga)
         mutated_children = mutation(children, mutProb);
         
         new_pop = vertcat(pop, mutated_children);
+        
         if nsga == 1
             output = NSGA2(new_pop, popSize);
         else
@@ -32,9 +33,9 @@ function output = NSGA(nGenes, maxGen, popSize, nsga)
         front = output.front;
         fitness = output.fitness;
         % plotting gif
-        displayFronts(front, fitness, pop);
-        gif
-        hold on
+%         displayFronts(front, fitness, pop);
+%         gif
+%         hold on
     end
 %     hold off;
     % append to output

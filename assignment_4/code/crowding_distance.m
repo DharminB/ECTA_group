@@ -6,11 +6,11 @@ function P_dist = crowding_distance(fitness)
         fmax = max(fitness(:,k));
         fmin = min(fitness(:,k));
         [P, indices] = sortrows(fitness(:,k));
-        P_dist(1) = Inf;
-        P_dist(popSize) = Inf;
+        P_dist(indices(1)) = Inf;
+        P_dist(indices(popSize)) = Inf;
         for i = 2:popSize-1
-            P_dist(i) = P_dist(i) + (P(i+1)-P(i-1))/(fmax-fmin);
+            P_dist(indices(i)) = P_dist(indices(i)) + (P(i+1)-P(i-1))/(fmax-fmin);
         end
     end
-    P_dist = P_dist(indices);
+%     P_dist = P_dist(indices);
 end
