@@ -1,8 +1,8 @@
 %% plot test
 
-popSize = 50;
-nGenes = 20;
-nGen = 100;
+popSize = 10;
+nGenes = 5;
+nGen = 10;
 % pop = randi(2, popSize, nGenes)-1
 % fitness = randi(popSize, popSize, 2)
 % front = randi(3, popSize,1)
@@ -14,23 +14,8 @@ tic;
 output = NSGA(nGenes, nGen, popSize, 1);
 % hold off
 toc
-% show output
-% output.bestFit(end)
-% subplot(1,2,1);
-% hold on;
-% plot(output.bestFit, 'LineWidth', 2);
-% plot(output.medianFit, 'LineWidth', 2);
-% hold off
-% legend('Best Penalty', 'Median Penalty', 'Location', 'NorthEast');
-% xlabel('Generation');
-% ylabel('Penalty');
-% % axis([0 maxGen 0 50]);
-% title('Performance on Color graph');
-% subplot(1,2,2);
-% plotGraph(g, kcolors, output.elite, colors);
-% title('Graph with colored nodes');
-% solution = output.elite';
-
+displayFronts(output.front, output.fitness, output.pop);
+hold off;
 
 %% Run multiple times
 tic;
