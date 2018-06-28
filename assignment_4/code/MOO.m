@@ -1,8 +1,8 @@
 %% single experiment
 
-popSize = 100;
+popSize = 150;
 nGenes = 20;
-nGen = 100;
+nGen = 200;
 plotgif = 0;
 use_nsga2 = 1
 if plotgif == 1
@@ -11,9 +11,17 @@ end
 tic;
 output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
 toc
-displayFronts(output.front, output.fitness, output.pop);
-% output.front==1
+displayFronts3d(output.front, output.fitness, output.pop);
+% output.fitness(front_2, :)
+% output.pop(front_2, :)
+% front_3 = output.front==3;
+% output.fitness(front_3, :)
+% output.pop(front_3, :)
+% % output.front==1
 hold off;
+indices = (output.front==1);
+sum(indices)
+new_pop = output.pop(indices, :);
 
 %% Run multiple times
 tic;
@@ -59,6 +67,30 @@ subplot(1,2,2);
 tic;
 popSize = 10;
 nGen = 1000;
+output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
+toc
+displayFronts(output.front, output.fitness, output.pop);
+hold off;
+
+%% Single exp comparision for nsga vs non_nsga
+popSize = 100;
+nGen = 100;
+nGenes = 20;
+plotgif = 0;
+if plotgif == 1
+    gif('myfile.gif');
+end
+
+subplot(1,2,1);
+use_nsga2 = 0;
+tic;
+output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
+toc
+displayFronts(output.front, output.fitness, output.pop);
+
+subplot(1,2,2);
+use_nsga2 = 1;
+tic;
 output = my_ga(nGenes, nGen, popSize, use_nsga2, plotgif);
 toc
 displayFronts(output.front, output.fitness, output.pop);
