@@ -40,11 +40,11 @@ for iFront=1:nFront
 %             fitness((front==iFront),2)-(0.25*~mod(iFront,2)),...
 %             num2str(pop( (front==iFront),:)))
 end
-xlabel('Leading Ones');ylabel('Trailng Zeros');
+xlabel('Leading Zeros');ylabel('Trailing Ones');
 
 plot(fitness(greenIndices, 1), fitness(greenIndices, 2), 'og', 'MarkerSize', 12)
 somearray = 1:popSize;
-redIndices = somearray(~ismember(somearray,greenIndices))
+redIndices = somearray(~ismember(somearray,greenIndices));
 plot(fitness(redIndices, 1), fitness(redIndices, 2), 'xr', 'MarkerSize', 12)
 
 axis([-0.5 nGenes+0.5 -0.5 nGenes+0.5]); hold off;

@@ -2,13 +2,13 @@ function output = NSGA2(pop, popSize, plotgif)
     R = unique(pop, 'rows');
     N = popSize;
     r_size = size(R, 1);
-    fitness = calculateFitness3(R);
+    fitness = calculateFitness(R);
     front = domination_sort(fitness);
 
     if plotgif == 1
         % plot whole pop
-        pause(0.5);
-        displayFronts3d(front, fitness, R);
+        pause(0.1);
+        displayFronts(front, fitness, R);
         gif
         hold on
     end
@@ -37,7 +37,7 @@ function output = NSGA2(pop, popSize, plotgif)
     if plotgif == 1
         % plot whole pop with next gen markers
 %         [C, greenIndices, ib] = intersect(R, new_pop, 'rows');
-%         pause(0.2);
+%         pause(0.05);
 %         displayFrontsWithMarkers(front, fitness, R, greenIndices);
 %         gif
 %         hold on
