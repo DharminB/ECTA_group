@@ -41,7 +41,7 @@ for iFront=1:nFront
 %             num2str(pop( (front==iFront),:)))
 end
 xlabel('Leading Zeros');ylabel('Trailing Ones');
-axis([-0.5 nGenes+0.5 -0.5 nGenes+0.5]); hold off;
+% axis([-0.5 nGenes+0.5 -0.5 nGenes+0.5]); hold off;
 title('Solutions and Fronts');
 grid on;
 
