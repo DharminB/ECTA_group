@@ -1,5 +1,5 @@
 %% This is an example call to the simulator
-
+addpath('./simulator/')
 %% Here is how a state is defined:
 %   state = [ x           <- the cart position
 %             x_dot       <- the cart velocity
@@ -9,12 +9,13 @@
 %             thet2a_dot  <- the angular velocity of the 2nd pole.
 %           ]
 fig = figure(1);
-totalSteps = 1000;
+totalSteps = 1;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 state = initialState;
+p.simParams.force = 10;
 for step=1:totalSteps
-    %% Check that all states are legal
+    % Check that all states are legal
     onTrack = abs(state(1)) < 2.16;
     notFast = abs(state(2)) < 1.35;
     pole1Up = abs(state(3)) < pi/2;
@@ -23,7 +24,7 @@ for step=1:totalSteps
     if any(failureConditions)   
         fitness = step; break;
     else % Do the next time step
-        %% ACTION SELECTION [your code goes here]
+        % ACTION SELECTION [your code goes here]
         scaledInput = state./scaling; % Normalize state vector for ANN
         
         % Output should be the response of your neural network. Here I just 
@@ -32,11 +33,11 @@ for step=1:totalSteps
         output = 2*(rand(1)-0.5);
         action = output*p.simParams.force; % Scale to full force
         
-        %% SIMULATE RESULT
+        % SIMULATE RESULT
         % Take action and return new state:
         state = cart_pole2( state, action );        
         
-        %% Visualize result (optional and slow, don't use all the time!)
+        % Visualize result (optional and slow, don't use all the time!)
         %clf
         cpvisual(fig, 1, state(1:4), [-3 3 0 2], action );         % Pole 1
         %cpvisual(fig, 0.5, state([1 2 5 6]), [-3 3 0 2], action );% Pole 2
