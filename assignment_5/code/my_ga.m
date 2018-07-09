@@ -7,21 +7,11 @@ nNode = nFeatures+nHidden+nOutputs;
 nGenes = (nFeatures*nHidden) + (nHidden*nOutputs);
 % popSize = 100;
 sp = 2;
-crossProb = 0.6;
-mutProb = 0.4;
-% totalSteps = 100;
-% initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
-% scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
-state = initialState;
-p.simParams.force = 10;
+crossProb = 1.0;
+mutProb = 1/nGenes;
 totalEpisodes = maxGen;
 
-% Train the network
-% Create a population
-% for iPop = 1:popSize
-%     pop(iPop,:) = randn(1,nGenes)*0.1;
-% end
-pop = randn(popSize,nGenes)*0.1;
+pop = rand(popSize,nGenes);
 fitness = zeros(1,popSize);
 BestFitness = zeros(1, totalEpisodes);
 

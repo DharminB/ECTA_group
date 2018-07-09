@@ -31,7 +31,7 @@ for step=1:totalSteps
             state(2)
             cpvisual(fig, 1, state(1:4), [-3 3 0 2], action );         % Pole 1
             % cpvisual(fig, 0.5, state([1 2 5 6]), [-3 3 0 2], action ); % Pole 2
-            pause(0.2)
+            pause(0.02)
         end
         %
     end
