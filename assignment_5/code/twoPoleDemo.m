@@ -9,6 +9,7 @@ addpath('./simulator/')
 %             thet2a_dot  <- the angular velocity of the 2nd pole.
 %           ]
 %% GA
+clear;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 10;
@@ -37,7 +38,7 @@ totalSteps = 1000;
 nFeatures = 6;
 nHidden = 12;
 output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden);
-output.bestFitness
+output.bestFitness;
 plot(output.bestFitness', 'LineWidth', 2);
 legend('Best Fitness', 'Location', 'NorthEast');
 xlabel('Generation');
@@ -50,21 +51,30 @@ sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHi
 
 %% Check matrix
 clear;
-initialState = [0 0 .037 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
+initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 totalSteps = 1000;
 nFeatures = 6;
 
 % for ga
-nHidden = 8;
-load('../ga.mat');
+% nHidden = 8;
+% load('../ga.mat');
+
+% for ga 2 pole
+% nHidden = 8;
+% load('../ga_2pole.mat');
 
 % for es
 % nHidden = 12;
 % load('../es.mat');
 % mat = es_mat;
 
-[iLimit, jLimit] = size(mat)
+% for es 2 pole
+nHidden = 12;
+load('../es_2pole.mat');
+mat = es_mat;
+
+[iLimit, jLimit] = size(mat);
 elite = zeros(1, nFeatures*nHidden + nHidden);
 count = 1;
 for i = 1:iLimit
@@ -75,7 +85,7 @@ for i = 1:iLimit
         end
     end
 end
-elite;
+elite
 
 sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 1)
 
