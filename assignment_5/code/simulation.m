@@ -26,12 +26,12 @@ for step=1:totalSteps
 
         % Visualize result (optional and slow, don't use all the time!)
         if visualise == 1
-            action
-            state(1)
-            state(2)
+%             action
+%             state(1)
+%             state(2)
             cpvisual(fig, 1, state(1:4), [-3 3 0 2], action );         % Pole 1
             % cpvisual(fig, 0.5, state([1 2 5 6]), [-3 3 0 2], action ); % Pole 2
-            pause(0.02)
+%             pause(0.005)
         end
         %
     end
