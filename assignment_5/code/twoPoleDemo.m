@@ -48,3 +48,27 @@ title('Performance on single cart pole');
 elite = output.elite;
 sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0)
 
+%% Check matrix
+clear;
+initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
+scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
+totalSteps = 1000;
+nFeatures = 6;
+nHidden = 8;
+load('../ga.mat');
+
+[iLimit, jLimit] = size(mat)
+elite = zeros(1, nFeatures*nHidden + nHidden);
+count = 1;
+for i = 1:iLimit
+    for j = 1:jLimit
+        if mat(i, j) ~= 0
+            elite(count) = mat(i, j);
+            count = count + 1;
+        end
+    end
+end
+elite
+
+sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 1)
+
