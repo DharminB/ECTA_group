@@ -1,12 +1,12 @@
-function output = ActivateFFNet(scaledState, WeightVector)
+function output = ActivateFFNet(scaledState, WeightVector, nF, nH)
 % The weight matrix is the individual.
 % Network Configuration :
 % 6 input nodes since number of inputs is 6.
 % 1 output node since output is just one value.
 % 1 hidden layer with 5 nodes.
 nInputs = 1; 
-nFeatures = 6;
-nHidden = 5; 
+nFeatures = nF;
+nHidden = nH; 
 nOutputs = 1;
 nNode = nFeatures+nHidden+nOutputs;
 
