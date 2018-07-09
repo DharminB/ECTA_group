@@ -50,12 +50,19 @@ sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHi
 
 %% Check matrix
 clear;
-initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
+initialState = [0 0 .037 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 totalSteps = 1000;
 nFeatures = 6;
+
+% for ga
 nHidden = 8;
 load('../ga.mat');
+
+% for es
+% nHidden = 12;
+% load('../es.mat');
+% mat = es_mat;
 
 [iLimit, jLimit] = size(mat)
 elite = zeros(1, nFeatures*nHidden + nHidden);
@@ -68,7 +75,7 @@ for i = 1:iLimit
         end
     end
 end
-elite
+elite;
 
 sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 1)
 
