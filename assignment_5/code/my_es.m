@@ -1,4 +1,4 @@
-function es_output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nF, nH)
+function es_output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nF, nH, NNId)
 % Algorithm Parameters
 lambda = 1;
 sigma = 0.5;
@@ -7,9 +7,16 @@ change_in_sigma = 0.6;
 nInputs = 1;
 nFeatures = nF;
 nHidden = nH;
-nOutputs = 1;
-nNode = nFeatures+nHidden+nOutputs;
-nGenes = (nFeatures*nHidden) + (nHidden*nOutputs);
+if NNId == 1
+    % Then FFNet
+    nOutputs = 1;
+    nNode = nFeatures+nHidden+nOutputs;
+    nGenes = (nFeatures*nHidden) + (nHidden*nOutputs);
+else
+    % Then RNN
+    nNode = nFeatures+nHidden;
+    nGenes = (nFeatures*nHidden) + (nHidden*(nHidden-1));
+end
 verbose = 1;
 bestFit = zeros([maxGen, 1]);
 
@@ -32,7 +39,7 @@ for iGen=1:maxGen
     pop = vertcat(pop, mutated_children);
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0, NNId);
         fitness(1, iPop) = step.fitness;
     end
     fitness_mutated_children = fitness(parentSize+1:parentSize+mutatedSize);

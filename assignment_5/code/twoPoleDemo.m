@@ -32,11 +32,12 @@ sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHi
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 1;
-maxGen = 100;
+maxGen = 500;
 totalSteps = 1000;
 nFeatures = 6;
 nHidden = 12;
-output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden);
+NNId = 1; % For FFNet
+output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden, NNId);
 output.bestFitness
 plot(output.bestFitness', 'LineWidth', 2);
 legend('Best Fitness', 'Location', 'NorthEast');
@@ -46,7 +47,28 @@ ylabel('Fitness');
 title('Performance on single cart pole');
 
 elite = output.elite;
-sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0)
+sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0, NNId)
+
+%% ES with RNN
+initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
+scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
+popSize = 1;
+maxGen = 500;
+totalSteps = 1000;
+nFeatures = 3;
+nHidden = 5;
+NNId = 0; % For RNN
+output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden, NNId);
+output.bestFitness
+plot(output.bestFitness', 'LineWidth', 2);
+legend('Best Fitness', 'Location', 'NorthEast');
+xlabel('Generation');
+ylabel('Fitness');
+% axis([0 maxGen 0 50]);
+title('Performance on single cart pole');
+
+elite = output.elite;
+sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0, NNId)
 
 %% Check matrix
 clear;
