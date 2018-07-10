@@ -1,10 +1,10 @@
-function output = ActivateRNNet(scaledState, WeightVector, nF, nH)
+function output = ActivateRNNet(nodeAct, WeightVector, nF, nH)
 nInputs = 1; 
 nFeatures = nF;
 nHidden = nH; 
 nNode = nFeatures+nHidden;
 
-inputVector = [scaledState(1) scaledState(3) scaledState(5)];
+% inputVector = [scaledState(1) scaledState(3) scaledState(5)];
 
 wMat = zeros(nNode);
 
@@ -24,10 +24,12 @@ for i=nFeatures+1:nFeatures+nHidden
     end
 end
 
-nodeAct = zeros(nInputs,nNode);
-nodeAct(1:nFeatures) = inputVector;
-for i = 1:nNode*nNode
-    nodeAct = tanh(nodeAct*wMat);
-end
-output = nodeAct(nNode);
+% nodeAct = zeros(nInputs,nNode);
+% nodeAct(1:nFeatures) = inputVector;
+% for i = 1:nNode*nNode
+%     nodeAct = tanh(nodeAct*wMat);
+% end
+nodeAct = tanh(nodeAct*wMat);
+output.action = nodeAct(nNode);
+output.nodeAct = nodeAct;
 end

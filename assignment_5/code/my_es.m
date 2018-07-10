@@ -1,8 +1,8 @@
 function es_output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nF, nH, NNId)
 % Algorithm Parameters
 lambda = 1;
-sigma = 0.5;
-change_in_sigma = 0.6;
+sigma = 0.6;
+change_in_sigma = 0.3;
 
 nInputs = 1;
 nFeatures = nF;
@@ -39,7 +39,8 @@ for iGen=1:maxGen
     pop = vertcat(pop, mutated_children);
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0, NNId);
+%         step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0, NNId);
+        step = simulation_rnn(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
         fitness(1, iPop) = step.fitness;
     end
     fitness_mutated_children = fitness(parentSize+1:parentSize+mutatedSize);

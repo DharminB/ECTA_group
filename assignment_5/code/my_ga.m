@@ -1,14 +1,21 @@
-function ga_output = my_ga(initialState, scaling, popSize, maxGen, totalSteps, nF, nH)
+function ga_output = my_ga(initialState, scaling, popSize, maxGen, totalSteps, nF, nH, NNId)
 nInputs = 1; 
 nFeatures = nF;
-nHidden = nH; 
-nOutputs = 1;
-nNode = nFeatures+nHidden+nOutputs;
-nGenes = (nFeatures*nHidden) + (nHidden*nOutputs);
+nHidden = nH;
+if NNId == 1
+    % Then FFNet
+    nOutputs = 1;
+    nNode = nFeatures+nHidden+nOutputs;
+    nGenes = (nFeatures*nHidden) + (nHidden*nOutputs);
+else
+    % Then RNN
+    nNode = nFeatures+nHidden;
+    nGenes = (nFeatures*nHidden) + (nHidden*(nHidden-1));
+end
 % popSize = 100;
 sp = 2;
-crossProb = 1.0;
-mutProb = 1/nGenes;
+crossProb = 0.9;
+mutProb = 0.4;
 totalEpisodes = maxGen;
 
 pop = rand(popSize,nGenes);
@@ -20,7 +27,7 @@ for episode=1:totalEpisodes
     % Run this for each individual to get its fitness
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        step = simulation_rnn(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
         fitness(1, iPop) = step.fitness;
     end
     parentIds = selection(fitness, popSize, sp);
@@ -29,7 +36,7 @@ for episode=1:totalEpisodes
     eliteIds  = elitism(fitness);
     newPop    = [pop(eliteIds,:); mut_children];
     pop       = newPop(1:popSize,:);
-    disp(episode);
+    disp([episode fitness(eliteIds)]);
     BestFitness(1,episode) = fitness(eliteIds);
 end
 ga_output.bestFitness = BestFitness;
