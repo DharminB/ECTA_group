@@ -1,4 +1,4 @@
-function sim_output = simulation(totalSteps, initialState, scaling, ind_weights, nF, nH, visualise)
+function sim_output = simulation(totalSteps, initialState, scaling, ind_weights, nF, nH, visualise, NNId)
 state = initialState;
 Weights = ind_weights;
 if visualise == 1
@@ -18,7 +18,13 @@ for step=1:totalSteps
     else
         scaledInput = state./scaling; % Normalize state vector for ANN
 
-        output = ActivateFFNet(scaledInput', Weights, nF, nH);
+        if NNId == 1
+            % FFNet
+            output = ActivateFFNet(scaledInput', Weights, nF, nH);
+        else
+            % RNNet
+            output = ActivateRNNet(scaledInput', Weights, nF, nH);
+        end
         action = output*10; % Scale to full force
 
         % SIMULATE RESULT
