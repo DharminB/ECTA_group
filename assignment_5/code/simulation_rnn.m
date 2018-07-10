@@ -1,6 +1,6 @@
 function sim_output = simulation_rnn(totalSteps, initialState, scaling, ind_weights, nF, nH, visualise)
 state = initialState;
-Weights = ind_weights;
+Weights = get_rnn_weight_matrix(ind_weights, nF, nH);
 if visualise == 1
     clf;
     fig = figure(1);
@@ -28,14 +28,10 @@ for step=1:totalSteps
 
         % Visualize result (optional and slow, don't use all the time!)
         if visualise == 1
-%             action
-%             state(1)
-%             state(2)
             cpvisual(fig, 1, state(1:4), [-3 3 0 2], action );         % Pole 1
             % cpvisual(fig, 0.5, state([1 2 5 6]), [-3 3 0 2], action ); % Pole 2
 %             pause(0.005)
         end
-        %
     end
 
 end
