@@ -1,10 +1,10 @@
-function ga_output = my_ga(initialState, scaling, popSize, maxGen, totalSteps, nF, nH)
+function ga_output = my_esp(initialState, scaling, popSize, maxGen, totalSteps, nF, nH)
 nInputs = 1; 
 nFeatures = nF;
 nHidden = nH; 
 nOutputs = 1;
 nNode = nFeatures+nHidden+nOutputs;
-nGenes = (nFeatures*nHidden) + (nHidden*nOutputs);
+nGenes = (nFeatures*nHidden) + (nHidden*(nHidden-1));
 % popSize = 100;
 sp = 2;
 crossProb = 1.0;
@@ -15,13 +15,12 @@ pop = rand(popSize,nGenes);
 fitness = zeros(1,popSize);
 BestFitness = zeros(1, totalEpisodes);
 
-%Run for 200 episodes
 for episode=1:totalEpisodes
     % Run this for each individual to get its fitness
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
-%         step = simulation_without_velocity(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+%         step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        step = simulation_without_velocity(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
         fitness(1, iPop) = step.fitness;
     end
     parentIds = selection(fitness, popSize, sp);
