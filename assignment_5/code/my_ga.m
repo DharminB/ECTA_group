@@ -27,7 +27,11 @@ for episode=1:totalEpisodes
     % Run this for each individual to get its fitness
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        if NNId == 1
+            step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        else
+            step = simulation_rnn(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        end
         fitness(1, iPop) = step.fitness;
     end
     parentIds = selection(fitness, popSize, sp);

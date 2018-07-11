@@ -9,6 +9,7 @@ addpath('./simulator/')
 %             thet2a_dot  <- the angular velocity of the 2nd pole.
 %           ]
 %% GA
+clear;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 10;
@@ -30,6 +31,7 @@ elite = output.elite;
 sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0)
 
 %% ES
+clear;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 1;
@@ -51,6 +53,7 @@ elite = output.elite;
 sim_output = simulation(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0, NNId)
 
 %% ES with RNN
+clear;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 1;
@@ -73,10 +76,11 @@ elite = output.elite;
 sim_output = simulation_rnn(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0)
 
 %% GA with RNN
+clear
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 10;
-maxGen = 500;
+maxGen = 1000;
 totalSteps = 1000;
 nFeatures = 3;
 nHidden = 5;
@@ -95,16 +99,15 @@ elite = output.elite;
 sim_output = simulation_rnn(totalSteps, initialState, scaling, elite, nFeatures, nHidden, 0)
 
 %% ESP
-
+clear;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 10;
-maxGen = 250;
+maxGen = 100;
 totalSteps = 1000;
 nFeatures = 3;
 nHidden = 8;
 nTrials = 5;
-NNId = 0; % For RNN type NN
 output = my_esp(initialState, scaling, popSize, maxGen, totalSteps, nTrials, nFeatures, nHidden);
 output.bestFitness;
 plot(output.bestFitness', 'LineWidth', 2);

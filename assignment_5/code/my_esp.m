@@ -3,7 +3,7 @@ function output = my_esp(initialState, scaling, popSize, maxGen, totalSteps, nTr
 nHidden = nH;
 nFeatures = nF;
 nGenes = nFeatures + nHidden; % genes for RNN
-mutProb = 1/nGenes;
+mutProb = 2/nGenes;
 % Create population
 pop = rand(popSize,nGenes, nHidden);
 elite = zeros(nGenes);
@@ -42,8 +42,8 @@ for iGen=1:maxGen
         children = crossover(top_quartile_pop, randi(quartile, popSize/2, 2), 1.0);
 %         children = crossover(top_quartile_pop, horzcat(randi(quartile, popSize/2, 1), ones(popSize/2, 1)), 1.0);
         mutated_children = mutation(children, mutProb);
-        pop(1:quartile, :, iNode) = top_quartile_pop;
-        pop(popSize/2 + 1:end, :, iNode) = mutated_children;
+%         pop(1:quartile, :, iNode) = top_quartile_pop;
+        pop(indices(popSize/2 + 1:end), :, iNode) = mutated_children;
 
     end
     disp([iGen bestFitness(iGen)])
