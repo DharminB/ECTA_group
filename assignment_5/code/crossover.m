@@ -1,6 +1,7 @@
-function children  = crossover(pop, parentIds, crossProb, nGenes)
+function children  = crossover(pop, parentIds, crossProb)
 children = [];
 sizeOfParent = size(parentIds);
+nGenes = size(pop, 2);
 for i = 1:sizeOfParent(1)
     % create random number to decide whether to crossover or not
     random_number = rand(1);

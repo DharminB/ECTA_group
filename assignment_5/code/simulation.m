@@ -18,13 +18,7 @@ for step=1:totalSteps
     else
         scaledInput = state./scaling; % Normalize state vector for ANN
 
-        if NNId == 1
-            % FFNet
-            output = ActivateFFNet(scaledInput', Weights, nF, nH);
-        else
-            % RNNet
-            output = ActivateRNNet(scaledInput', Weights, nF, nH);
-        end
+        output = ActivateFFNet(scaledInput', Weights, nF, nH);
         action = output*10; % Scale to full force
 
         % SIMULATE RESULT

@@ -27,12 +27,12 @@ for episode=1:totalEpisodes
     % Run this for each individual to get its fitness
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-        step = simulation_rnn(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
+        step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
         fitness(1, iPop) = step.fitness;
     end
     parentIds = selection(fitness, popSize, sp);
-    children = crossover(pop, parentIds, crossProb, nGenes);
-    mut_children = mutation(children, nGenes, mutProb);
+    children = crossover(pop, parentIds, crossProb);
+    mut_children = mutation(children, mutProb);
     eliteIds  = elitism(fitness);
     newPop    = [pop(eliteIds,:); mut_children];
     pop       = newPop(1:popSize,:);
