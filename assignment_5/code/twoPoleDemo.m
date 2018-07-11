@@ -15,7 +15,7 @@ scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to 
 popSize = 10;
 maxGen = 100;
 totalSteps = 1000;
-nFeatures = 4;
+nFeatures = 6;
 nHidden = 8;
 NNId = 1;
 output = my_ga(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden, NNId);
@@ -35,10 +35,10 @@ clear;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
 popSize = 1;
-maxGen = 500;
+maxGen = 50;
 totalSteps = 1000;
-nFeatures = 6;
-nHidden = 12;
+nFeatures = 4;
+nHidden = 1;
 NNId = 1; % For FFNet
 output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden, NNId);
 output.bestFitness
@@ -124,7 +124,7 @@ sim_output = simulation_esp(totalSteps, initialState, scaling, elite, nFeatures,
 nExp = 10;
 initialState = [0 0 .017 0 0.0 0]';  % initial state (note, it is a column vector) (1 degree = .017 rad)
 scaling = [ 2.4 10.0 0.628329 5 0.628329 16]'; % Divide state vector by this to scale state to numbers between 1 and 0
-popSize = 10;
+popSize = 1;
 maxGen = 100;
 totalSteps = 1000;
 nFeatures = 4;
@@ -133,7 +133,7 @@ NNId = 1;
 fitness_esp = zeros(nExp, maxGen);
 
 for iExp=1:nExp
-    output = my_ga(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden, NNId);
+    output = my_es(initialState, scaling, popSize, maxGen, totalSteps, nFeatures, nHidden, NNId);
     fitness_esp(iExp,:) = output.bestFitness;
 end
 
