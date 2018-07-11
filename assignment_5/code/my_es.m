@@ -39,7 +39,7 @@ for iGen=1:maxGen
     pop = vertcat(pop, mutated_children);
     for iPop = 1:popSize
         Weights = pop(iPop,:);
-%         step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0, NNId);
+%         step = simulation(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
         step = simulation_rnn(totalSteps, initialState, scaling, Weights, nFeatures, nHidden, 0);
         fitness(1, iPop) = step.fitness;
     end

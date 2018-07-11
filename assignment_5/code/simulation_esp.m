@@ -1,7 +1,6 @@
-function sim_output = simulation_rnn(totalSteps, initialState, scaling, ind_weights, nF, nH, visualise)
+function sim_output = simulation_esp(totalSteps, initialState, scaling, ind_weights, nF, nH, visualise)
 state = initialState;
-% Weights = ind_weights;
-Weights = get_rnn_weight_matrix(ind_weights, nF, nH);
+Weights = ind_weights;
 if visualise == 1
     clf;
     fig = figure(1);

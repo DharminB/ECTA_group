@@ -1,5 +1,6 @@
-function mutated_children = mutation(children, nGenes, mutProb)
+function mutated_children = mutation(children, mutProb)
 mutated_children = children; 
+nGenes = size(children, 2);
 sizeOfChildren = size(mutated_children);
 for i=1:sizeOfChildren(1)
     for j=1:nGenes
