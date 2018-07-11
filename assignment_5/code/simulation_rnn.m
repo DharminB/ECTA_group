@@ -18,7 +18,8 @@ for step=1:totalSteps
         break;
     else
         scaledInput = state./scaling; % Normalize state vector for ANN
-        nodeAct(1:nF) = scaledInput([1 3 5]);
+        modeAct(1) = 1;
+        nodeAct(2:nF) = scaledInput([1 3 5]);
         % RNNet
         output = ActivateRNNet(nodeAct, Weights, nF, nH);
         action = output.action*10; % Scale to full force

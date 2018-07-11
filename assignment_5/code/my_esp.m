@@ -3,7 +3,7 @@ function output = my_esp(initialState, scaling, popSize, maxGen, totalSteps, nTr
 nHidden = nH;
 nFeatures = nF;
 nGenes = nFeatures + nHidden; % genes for RNN
-mutProb = 2/nGenes;
+mutProb = 3/nGenes;
 % Create population
 pop = rand(popSize,nGenes, nHidden);
 elite = zeros(nGenes);
